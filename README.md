@@ -4,7 +4,7 @@
 
 # Explorer Template
 
-This is a template to help you get started with your projects. Find out more information inside of the Fello Handbook.
+This is a template to help you get started with your projects. Find out more information inside of the Fellow Handbook.
 
 This template has a `main` and `staging` branch already setup. 
 
