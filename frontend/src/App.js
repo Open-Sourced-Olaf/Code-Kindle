@@ -4,6 +4,7 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
+import axios from "axios";
 //import compiler from "compileon";
 var compiler = require("compilex");
 var options = { stats: true }; //prints stats on console
@@ -145,17 +146,38 @@ function Mainnavigation(props) {
 
 function Primarybutton(props) {
   const { continuePracticing } = props;
+  //const [state, setState] = useState({ files: null });
+  const handleFilesChange = (e) => {
+    //setState({ files: e.target.files[0] });
+
+    //console.log(e.target.files[0]);
+    //console.log(state.files);
+
+    let form_data = new FormData();
+    form_data.append("files", e.target.files[0]);
+    let url = "http://localhost:8000/api/posts/";
+    axios
+      .post(url, form_data)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="primary-button border-1px-nobel">
       <div className="continue-practicing valign-text-bottom archivo-bold-white-16px">
-        {continuePracticing}
+        <input
+          type="file"
+          id="myfile"
+          name="myfile"
+          onChange={handleFilesChange}
+          required
+        />
       </div>
     </div>
   );
 }
-
-  
 
 function Primarybutton2(props) {
   const { continuePracticing } = props;
