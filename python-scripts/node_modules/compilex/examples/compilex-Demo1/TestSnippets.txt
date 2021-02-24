@@ -1,0 +1,134 @@
+C 
+==
+
+#include<stdio.h>
+int main()
+{
+    printf("Hello World from C");
+        return 0;
+}
+
+#include<stdio.h>
+int main()
+{
+        int a , b, c ;
+        scanf("%d",&a);
+        scanf("%d",&b);
+        c = a + b ;
+        printf("%d",c);
+        return 0;
+}
+
+@@@@@@@@@@@@@@@@@@@@@@@@
+
+C++
+===
+#include<iostream>
+using namespace std;
+int main()
+{
+    cout<<"Hello World from C++";   
+    return 0;
+}
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    int a , b, c ;
+    cin>>a;
+    cin>>b;
+    c = a + b ;
+    cout<<c;
+    return 0;
+}
+
+@@@@@@@@@@@@@@@@@@@@@@@@
+
+Java
+====
+class Main
+{
+public static void main(String[] args)
+{
+System.out.println("Hello World");
+}
+}
+
+
+import java.util.*;
+public class Main {
+ 
+  public static void main(String[] args) {        
+        String a = new String();
+        Scanner x = new Scanner(System.in );
+        a = x.next();
+        System.out.println(a);
+            
+ 
+    }
+ 
+}
+
+@@@@@@@@@@@@@@@@@@@@@@@@
+
+Python
+======
+print "hello world"
+
+a=int(raw_input("Enter a value "))
+b=int(raw_input("Enter b value "))
+c=a+b
+print c
+
+@@@@@@@@@@@@@@@@@@@@@@@@
+
+C#
+==
+
+using System;
+
+namespace Main
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a =  Int16.Parse(Console.ReadLine());
+            int b = Int16.Parse(Console.ReadLine());
+            int c = a + b;
+            Console.WriteLine("The answer is {0} " , c );
+        }
+    }
+}
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@
+
+VB
+==
+
+Module Module1
+
+Sub Main()
+Console.WriteLine("Hello World")
+End Sub
+
+End Module 
+
+Module Module1
+
+    Sub Main()
+        Dim a As Integer
+        Dim b As Integer
+        Dim c As Integer
+        a = Console.ReadLine()
+        b = Console.ReadLine()
+        c = a + b
+        Console.WriteLine("c value is " & c.ToString())
+
+    End Sub
+
+End Module
+
+@@@@@@@@@@@@@@@@@@@@@@@@
