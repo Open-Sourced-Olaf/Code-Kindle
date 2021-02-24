@@ -1,0 +1,216 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Archivo:400,700|Chivo:400|Nunito+Sans:700");
+* {
+  box-sizing: border-box;
+}
+.archivo-bold-black-18px {
+  color: black;
+  font-family: "Archivo", Helvetica, Arial, serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+}
+.archivo-bold-olive-18px {
+  color: var(--olive);
+  font-family: "Archivo", Helvetica, Arial, serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+}
+.archivo-bold-white-16px {
+  color: white;
+  font-family: "Archivo", Helvetica, Arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+}
+.archivo-normal-olive-16px {
+  color: var(--olive);
+  font-family: "Archivo", Helvetica, Arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+.border-1px-nobel {
+  border: 1px solid var(--nobel);
+}
+.chivo-normal-nobel-16px {
+  color: var(--nobel);
+  font-family: "Chivo", Helvetica, Arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+.chivo-normal-white-16px {
+  color: white;
+  font-family: "Chivo", Helvetica, Arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+.converter {
+  align-items: center;
+  background-color: var(--chartreuse-yellow);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+.converter .avatar {
+  height: 1px;
+  margin-left: 226px;
+  object-fit: cover;
+  width: 1px;
+}
+.converter .browse-i281343271 {
+  letter-spacing: 0px;
+  margin-left: 22px;
+  min-height: 20px;
+  min-width: 87px;
+  opacity: 0.75;
+}
+.converter .continue-practicing {
+  height: 20px;
+  letter-spacing: 0px;
+  line-height: 20px;
+  min-height: 20px;
+  min-width: 84px;
+  white-space: nowrap;
+}
+.converter .continue-practicing-1 {
+  height: 20px;
+  letter-spacing: 0px;
+  line-height: 20px;
+  min-height: 20px;
+  min-width: 63px;
+  white-space: nowrap;
+}
+.converter .go-back-281344 {
+  height: 19px;
+  left: 40px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 41px;
+}
+.converter .line-3 {
+  height: 909px;
+  left: 658px;
+  position: absolute;
+  top: 0px;
+  width: 1px;
+}
+.converter .main-navigation {
+  align-items: center;
+  background-color: var(--chartreuse-yellow);
+  display: flex;
+  height: 88px;
+  padding: 0 32px;
+  width: 1366px;
+}
+.converter .messages-i2813432 {
+  letter-spacing: 0px;
+  margin-bottom: 1px;
+  margin-left: 892px;
+  min-height: 17px;
+  min-width: 2px;
+  opacity: 0.75;
+}
+.converter .overlap-group {
+  height: 912px;
+  position: relative;
+  width: 1318px;
+}
+.converter .place {
+  letter-spacing: 0px;
+  min-height: 20px;
+  min-width: 52px;
+}
+.converter .primary-button {
+  align-items: center;
+  background-color: black;
+  display: flex;
+  height: 52px;
+  left: 40px;
+  padding: 0 22px;
+  position: absolute;
+  top: 201px;
+  width: 130px;
+}
+.converter .primary-button-1 {
+  align-items: center;
+  background-color: black;
+  display: flex;
+  height: 52px;
+  left: 222px;
+  padding: 0 22px;
+  position: absolute;
+  top: 201px;
+  width: 109px;
+}
+.converter .pseudocode-281345 {
+  left: 694px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 84px;
+  width: 448px;
+}
+.converter .rectangle-10 {
+  height: 580px;
+  left: 40px;
+  object-fit: cover;
+  position: absolute;
+  top: 297px;
+  width: 584px;
+}
+.converter .rectangle-11 {
+  height: 580px;
+  left: 694px;
+  object-fit: cover;
+  position: absolute;
+  top: 297px;
+  width: 584px;
+}
+.converter .rectangle-9 {
+  background-color: black;
+  height: 911px;
+  left: 0px;
+  position: absolute;
+  top: 1px;
+  width: 1318px;
+}
+.converter .source-code-281349 {
+  left: 40px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 84px;
+  width: 448px;
+}
+.converter .text-3 {
+  left: 40px;
+  letter-spacing: 0px;
+  opacity: 0.75;
+  position: absolute;
+  top: 150px;
+}
+.nunitosans-bold-white-52px {
+  color: white;
+  font-family: "Nunito Sans", Helvetica, Arial, serif;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 700;
+}
+:root {
+  --chartreuse-yellow: rgba(234, 255, 0, 1);
+  --nobel: rgba(178, 178, 178, 1);
+  --olive: rgba(108, 122, 0, 1);
+}
+.valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.valign-text-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
