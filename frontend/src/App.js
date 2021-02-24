@@ -1,7 +1,35 @@
 import React, { useState } from "react";
 import "./App.css";
-import axios from "axios";
+import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/ext-language_tools";
+//import compiler from "compileon";
+var compiler = require("compilex");
+var options = { stats: true }; //prints stats on console
 
+function onChange(newValue) {
+  console.log("change", newValue);
+}
+const code = `#include<iostream>
+using namespace std;
+int main(){
+  cout<<"hello world";
+}
+
+`;
+function runCPP() {
+  compiler.init(options);
+  // var envData = { OS: "windows", cmd: "g++" }; // (uses g++ command to compile )
+  //else
+  var envData = { OS: "linux", cmd: "g++" }; // ( uses gcc command to compile )
+  compiler.compileCPP(envData, code, function (data) {
+    //res.send(data);
+    console.log(data.output);
+    //data.error = error message
+    //data.output = output value
+  });
+}
 function App() {
   return <Converter {...ConverterData} />;
 }
@@ -32,8 +60,48 @@ function Converter(props) {
       />
       <div className="overlap-group">
         <div className="rectangle-9"></div>
-        <img className="rectangle-10" src={rectangle10} />
-        <img className="rectangle-11" src={rectangle11} />
+
+        <AceEditor
+          width="600px"
+          className="rectangle-10"
+          mode="C++"
+          theme="monokai"
+          name="UNIQUE_ID_OF_DIV"
+          placeholder="Write the code to be converted"
+          editorProps={{ $blockScrolling: true }}
+          onChange={onChange}
+          fontSize={14}
+          wrapEnabled="true"
+          showPrintMargin={true}
+          showGutter={true}
+          highlightActiveLine={true}
+          setOptions={{
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+            enableSnippets: true,
+            showLineNumbers: true,
+            tabSize: 2,
+          }}
+        />
+        <AceEditor
+          className="rectangle-11"
+          mode="text"
+          theme="monokai"
+          onChange={onChange}
+          name="UNIQUE_ID_OF_DIV"
+          editorProps={{ $blockScrolling: true }}
+          setOptions={{
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+            enableSnippets: true,
+          }}
+          width="600px"
+          fontSize="14px"
+          highlightActiveLine="true"
+          wrapEnabled="true"
+          readOnly="true"
+        />
+
         <img className="line-3" src={line3} />
         <div className="go-back-281344 valign-text-middle chivo-normal-white-16px">
           {goBack281344}
@@ -41,6 +109,7 @@ function Converter(props) {
         <h1 className="pseudocode-281345 nunitosans-bold-white-52px">
           {pseudocode281345}
         </h1>
+
         <div className="text-3 chivo-normal-nobel-16px">{text3}</div>
         <Primarybutton
           continuePracticing={primarybuttonProps.continuePracticing}
@@ -48,6 +117,7 @@ function Converter(props) {
         <Primarybutton2
           continuePracticing={primarybutton2Props.continuePracticing}
         />
+
         <div className="source-code-281349 nunitosans-bold-white-52px">
           {sourceCode281349}
         </div>
@@ -75,38 +145,17 @@ function Mainnavigation(props) {
 
 function Primarybutton(props) {
   const { continuePracticing } = props;
-  //const [state, setState] = useState({ files: null });
-  const handleFilesChange = (e) => {
-    //setState({ files: e.target.files[0] });
-
-    //console.log(e.target.files[0]);
-    //console.log(state.files);
-
-    let form_data = new FormData();
-    form_data.append("files", e.target.files[0]);
-    let url = "http://localhost:8000/api/posts/";
-    axios
-      .post(url, form_data)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
 
   return (
     <div className="primary-button border-1px-nobel">
       <div className="continue-practicing valign-text-bottom archivo-bold-white-16px">
-        <input
-          type="file"
-          id="myfile"
-          name="myfile"
-          onChange={handleFilesChange}
-          required
-        />
+        {continuePracticing}
       </div>
     </div>
   );
 }
+
+  
 
 function Primarybutton2(props) {
   const { continuePracticing } = props;
