@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
+import axios from "axios";
 
 function App() {
   return <Converter {...ConverterData} />;
@@ -18,7 +19,7 @@ function Converter(props) {
     sourceCode281349,
     mainnavigationProps,
     primarybuttonProps,
-    primarybutton2Props
+    primarybutton2Props,
   } = props;
 
   return (
@@ -74,11 +75,34 @@ function Mainnavigation(props) {
 
 function Primarybutton(props) {
   const { continuePracticing } = props;
+  //const [state, setState] = useState({ files: null });
+  const handleFilesChange = (e) => {
+    //setState({ files: e.target.files[0] });
+
+    //console.log(e.target.files[0]);
+    //console.log(state.files);
+
+    let form_data = new FormData();
+    form_data.append("files", e.target.files[0]);
+    let url = "http://localhost:8000/api/posts/";
+    axios
+      .post(url, form_data)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="primary-button border-1px-nobel">
       <div className="continue-practicing valign-text-bottom archivo-bold-white-16px">
-        {continuePracticing}
+        <input
+          type="file"
+          id="myfile"
+          name="myfile"
+          onChange={handleFilesChange}
+          required
+        />
       </div>
     </div>
   );
@@ -100,15 +124,15 @@ const mainnavigationData = {
   browseI281343271: "Converter",
   messagesI2813432: "",
   avatar:
-    "https://anima-uploads.s3.amazonaws.com/projects/602ed17b8747711f3b22546f/releases/602ed9da0392314c332dde89/img/avatar@2x.png"
+    "https://anima-uploads.s3.amazonaws.com/projects/602ed17b8747711f3b22546f/releases/602ed9da0392314c332dde89/img/avatar@2x.png",
 };
 
 const primarybuttonData = {
-  continuePracticing: "Upload file"
+  continuePracticing: "Upload file",
 };
 
 const primarybutton2Data = {
-  continuePracticing: "Convert"
+  continuePracticing: "Convert",
 };
 
 const ConverterData = {
@@ -124,5 +148,5 @@ const ConverterData = {
   sourceCode281349: "Source code",
   mainnavigationProps: mainnavigationData,
   primarybuttonProps: primarybuttonData,
-  primarybutton2Props: primarybutton2Data
+  primarybutton2Props: primarybutton2Data,
 };
