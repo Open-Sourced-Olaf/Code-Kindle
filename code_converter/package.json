@@ -1,0 +1,24 @@
+{
+  "name": "code_converter_assets",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [],
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@dfinity/agent": "0.6.23",
+    "terser-webpack-plugin": "2.2.2",
+    "webpack": "4.41.3",
+    "webpack-cli": "3.3.10"
+  },
+  "dependencies": {
+    "css-loader": "^5.0.2",
+    "react": "^16.14.0",
+    "react-ace": "^9.3.0",
+    "react-dom": "^16.14.0",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.2.2"
+  }
+}

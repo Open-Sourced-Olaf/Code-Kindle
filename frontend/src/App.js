@@ -1,22 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
-import compiler from "compileon";
+import axios from "axios";
+//import compiler from "compileon";
+var compiler = require("compilex");
+var options = { stats: true }; //prints stats on console
 
-var newValue;
 function onChange(newValue) {
   console.log("change", newValue);
 }
-var language_id;
-function language(event) {
-  event.preventDefault();
-  this.setState({ language_id: event.target.value });
+const code = `#include<iostream>
+using namespace std;
+int main(){
+  cout<<"hello world";
 }
+
+`;
 function runCPP() {
-  alert("hello");
+  compiler.init(options);
+  // var envData = { OS: "windows", cmd: "g++" }; // (uses g++ command to compile )
+  //else
+  var envData = { OS: "linux", cmd: "g++" }; // ( uses gcc command to compile )
+  compiler.compileCPP(envData, code, function (data) {
+    //res.send(data);
+    console.log(data.output);
+    //data.error = error message
+    //data.output = output value
+  });
 }
 function App() {
   return <Converter {...ConverterData} />;
@@ -133,11 +146,34 @@ function Mainnavigation(props) {
 
 function Primarybutton(props) {
   const { continuePracticing } = props;
+  //const [state, setState] = useState({ files: null });
+  const handleFilesChange = (e) => {
+    //setState({ files: e.target.files[0] });
+
+    //console.log(e.target.files[0]);
+    //console.log(state.files);
+
+    let form_data = new FormData();
+    form_data.append("files", e.target.files[0]);
+    let url = "http://localhost:8000/api/posts/";
+    axios
+      .post(url, form_data)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
-    <div className="primary-button border-1px-nobel" onClick={() => runCPP()}>
+    <div className="primary-button border-1px-nobel">
       <div className="continue-practicing valign-text-bottom archivo-bold-white-16px">
-        {continuePracticing}
+        <input
+          type="file"
+          id="myfile"
+          name="myfile"
+          onChange={handleFilesChange}
+          required
+        />
       </div>
     </div>
   );
