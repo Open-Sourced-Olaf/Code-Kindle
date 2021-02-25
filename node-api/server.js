@@ -5,10 +5,22 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = 8000;
 var cors = require("cors");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors()); // Use this after the variable declaration
+app.get("/api/hello", (req, res) => {
+  res.send({ express: "Hello From Express" });
+});
+
+app.post("/api/world", (req, res) => {
+  console.log(req.body);
+  res.send(
+    `I received your POST request. This is what you sent me: ${req.body.post}`
+  );
+});
 app.get("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
+  // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
   console.log(req.url);
   console.log("url");
   console.log(req.query.code);
@@ -23,7 +35,7 @@ app.get("/", (req, res) => {
       console.log(err);
     }); */
   const sourcecode = `print("Hell0 W0rld!")`;
-  let resultPromise = python.runSource(code);
+  let resultPromise = python.runFile("generatePseudo.py");
   resultPromise
     .then((result) => {
       res.send(result);

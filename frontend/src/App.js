@@ -10,36 +10,19 @@ import axios from "axios";
 //var compiler = require("compileon");
 // var options = { stats: true }; //prints stats on console
 
-var code = `print("hello")`;
+//var code = `print("hello")`;
+var ans = "pseudocode";
 function onChange(newValue) {
-  code = newValue;
+  //  value = ans;
   console.log("change", newValue);
 }
-/* const code = `
+const code = `
  #include<iostream> using namespace std;
  int main(){
    cout<<"hello world";
  }"
  `;
-function run() {
-  var envData = { OS: "linux", cmd: " g++" };
-  compiler.ccCompile(envData, code, function (data) {
-    // res.send(data);
-    console.log(data.output);
-  });
-} */
-// function runCPP() {
-//   compiler.init(options);
-//   // var envData = { OS: "windows", cmd: "g++" }; // (uses g++ command to compile )
-//   //else
-//   var envData = { OS: "linux", cmd: "g++" }; // ( uses gcc command to compile )
-//   compiler.compileCPP(envData, code, function (data) {
-//     //res.send(data);
-//     console.log(data.output);
-//     //data.error = error message
-//     //data.output = output value
-//   });
-// }
+
 function App() {
   return <Converter {...ConverterData} />;
 }
@@ -47,6 +30,7 @@ function App() {
 export default App;
 
 function Converter(props) {
+  
   const {
     rectangle10,
     rectangle11,
@@ -94,7 +78,9 @@ function Converter(props) {
           }}
         />
         <AceEditor
+          value={ans}
           className="rectangle-11"
+          placeholder={ans}
           mode="text"
           theme="monokai"
           onChange={onChange}
@@ -189,12 +175,16 @@ function Primarybutton(props) {
   );
 }
 function handleConvert() {
-  let url2 = `http://localhost:3000/code=${code}`;
+  //alert("hello")code = "hello";
+  let url2 = `http://localhost:3000`;
 
   axios
     .get(url2)
     .then((res) => {
       console.log(res.data);
+
+      ans = res.data.stdout;
+      console.log(ans);
     })
     .catch((err) => console.log(err));
 }
@@ -202,12 +192,9 @@ function Primarybutton2(props) {
   const { continuePracticing } = props;
 
   return (
-    <div
-      className="primary-button-1 border-1px-nobel"
-      onClick={handleConvert()}
-    >
+    <div className="primary-button-1 border-1px-nobel">
       <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
-        {continuePracticing}
+        <button onClick={handleConvert}>Convert</button>
       </div>
     </div>
   );

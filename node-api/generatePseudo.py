@@ -1,4 +1,4 @@
-TestFile = "hello.py"
+TestFile = "/home/anjalisoni3655/pseudogen/backend/media/documents/sample.py"
 import logging
 from logging import debug, info, warning, basicConfig, INFO, DEBUG, WARNING
 basicConfig(level = WARNING)
@@ -95,12 +95,10 @@ def writeListFile(listFile, name = "/home/asus/Terminal-2.0/python-scripts/pytho
         mainstr = mainstr + listFile[i] + "\n"
     file.write(mainstr)
     file.close()
-    print("")
-    print("------------------------")
-    print("Checkout the pseudocode generated file")
-    print("The file can be found at " + name)
-    print("------------------------")
-    print("")
+    log = open(name, "r")
+    for line in log:
+        print(line)
+   
 
 
 def indent(listFile, avoidLines):
@@ -201,12 +199,12 @@ def removeLastChar(line, remove):
 
 def main(filename):
 
-    print("Now working on " + filename)
+    #print("Now working on " + filename)
     listFile = getTextFile(filename)                             
     listFile = removeLastCharacter(listFile)                                 
     listFile = removeBlanks(listFile)                       
     avoidLines = detectMultiLineComment(listFile)       
-    print("Searching through file, this may take a while")
+   # print("Searching through file, this may take a while")
 
     clues = [["elif", "~~~"],]
 
@@ -234,8 +232,3 @@ def main(filename):
     writeListFile(listFile, filename)
 
 main(TestFile)
-print("")
-print("")
-print("----------------")
-print("Process complete")
-print("----------------")
