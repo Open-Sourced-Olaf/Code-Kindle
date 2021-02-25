@@ -21,10 +21,10 @@ pseudocode after the conversion.
 
 
 ## Project Structure
-- `backend folder` contains the code for the Django based API to upload the files into the projects directory.
+- `backend` folder contains the code for the Django based API to upload the files into the projects directory.
 - `code_converter` folder contains the frontend code deployed on DFINITY.
 - `cpp-pseudogen` folder contains the translator code for cpp/c languages.
-- `frontend folder` contains the UI of the entire webapp.
+- `frontend` folder contains the UI of the entire webapp.
 - `python-scripts` folder contains the translator for python source code.
 
 ## How to run the project locally.
