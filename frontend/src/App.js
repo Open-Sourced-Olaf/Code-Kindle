@@ -5,32 +5,33 @@ import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import axios from "axios";
-//import compiler from "compileon";
-var compiler = require("compilex");
-var options = { stats: true }; //prints stats on console
+import cpp from "compile-run";
+//const { cpp } = require("compile-run");
+// var compiler = require("compilex");
+// var options = { stats: true }; //prints stats on console
 
 function onChange(newValue) {
   console.log("change", newValue);
 }
-const code = `#include<iostream>
-using namespace std;
-int main(){
-  cout<<"hello world";
-}
+// const code = `#include<iostream>
+// using namespace std;
+// int main(){
+//   cout<<"hello world";
+// }
 
-`;
-function runCPP() {
-  compiler.init(options);
-  // var envData = { OS: "windows", cmd: "g++" }; // (uses g++ command to compile )
-  //else
-  var envData = { OS: "linux", cmd: "g++" }; // ( uses gcc command to compile )
-  compiler.compileCPP(envData, code, function (data) {
-    //res.send(data);
-    console.log(data.output);
-    //data.error = error message
-    //data.output = output value
-  });
-}
+// `;
+// function runCPP() {
+//   compiler.init(options);
+//   // var envData = { OS: "windows", cmd: "g++" }; // (uses g++ command to compile )
+//   //else
+//   var envData = { OS: "linux", cmd: "g++" }; // ( uses gcc command to compile )
+//   compiler.compileCPP(envData, code, function (data) {
+//     //res.send(data);
+//     console.log(data.output);
+//     //data.error = error message
+//     //data.output = output value
+//   });
+// }
 function App() {
   return <Converter {...ConverterData} />;
 }
@@ -178,12 +179,29 @@ function Primarybutton(props) {
     </div>
   );
 }
+function handleClick() {
+  var code = `
+#include
+using namespace std;
+int main() {
+cout << "Hello World";
+}
+`;
 
+  cpp
+    .runSource(code, {
+      timeout: 3000,
+      compileTimeout: 5000,
+      stdin: "0",
+      compilationPath: "/usr/bin/g++",
+    })
+    .then((res) => console.log(res));
+}
 function Primarybutton2(props) {
   const { continuePracticing } = props;
 
   return (
-    <div className="primary-button-1 border-1px-nobel">
+    <div className="primary-button-1 border-1px-nobel" onClick={handleClick()}>
       <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
         {continuePracticing}
       </div>

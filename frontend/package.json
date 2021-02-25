@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.1",
+    "compile-run": "^2.3.4",
     "compileon": "^1.1.0",
     "compilex": "^0.7.4",
     "react": "^17.0.1",
