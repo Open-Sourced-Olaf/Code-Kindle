@@ -5,6 +5,12 @@ import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import axios from "axios";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+
+const options = ["c", "cpp", "python"];
+var language;
+const defaultOption = options[0];
 
 const code = `
  #include<iostream> using namespace std;
@@ -24,6 +30,10 @@ function Converter(props) {
     ans: "pseudocode",
   });
   var myCode;
+  const onSelect = (e) => {
+    language = e.value;
+    console.log(e.value);
+  };
 
   function onChange(newValue) {
     //  value = ans;
@@ -48,7 +58,7 @@ function Converter(props) {
   } = props;
   function handleConvert() {
     //alert("hello")code = "hello";
-    let url2 = `http://localhost:3000?code=${myCode}`;
+    let url2 = `http://localhost:3000?code=${myCode}&lang=${language}`;
 
     axios
       .get(url2)
@@ -126,14 +136,22 @@ function Converter(props) {
           {pseudocode281345}
         </h1>
 
-        <div className="text-3 chivo-normal-nobel-16px">{text3}</div>
         <Primarybutton
           continuePracticing={primarybuttonProps.continuePracticing}
         />
+
         <div className="primary-button-1 border-1px-nobel">
           <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
             <button onClick={handleConvert}>Convert</button>
           </div>
+        </div>
+        <div className="text-3 chivo-normal-nobel-16px">
+          <Dropdown
+            options={options}
+            onChange={onSelect}
+            value={defaultOption}
+            placeholder="Select an option"
+          />
         </div>
 
         <div className="source-code-281349 nunitosans-bold-white-52px">
