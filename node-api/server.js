@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
       console.log(err);
     }); */
   const sourcecode = `print("Hell0 W0rld!")`;
-  let resultPromise = python.runFile("generatePseudo.py");
+  let resultPromise = python.runFile("");
   resultPromise
     .then((result) => {
       res.send(result);

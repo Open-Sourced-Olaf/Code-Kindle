@@ -5,17 +5,7 @@ import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import axios from "axios";
-//import cpp from "compile-run";
-//const { cpp } = require("compile-run");
-//var compiler = require("compileon");
-// var options = { stats: true }; //prints stats on console
 
-//var code = `print("hello")`;
-var ans = "pseudocode";
-function onChange(newValue) {
-  //  value = ans;
-  console.log("change", newValue);
-}
 const code = `
  #include<iostream> using namespace std;
  int main(){
@@ -30,7 +20,20 @@ function App() {
 export default App;
 
 function Converter(props) {
-  
+  const [state, setState] = useState({
+    ans: "pseudocode",
+  });
+  var myCode;
+
+  function onChange(newValue) {
+    //  value = ans;
+    myCode = `${newValue}`;
+    console.log("mycode", myCode);
+    console.log("change", newValue);
+  }
+
+  console.log(state.ans); // 0
+
   const {
     rectangle10,
     rectangle11,
@@ -43,6 +46,23 @@ function Converter(props) {
     primarybuttonProps,
     primarybutton2Props,
   } = props;
+  function handleConvert() {
+    //alert("hello")code = "hello";
+    let url2 = `http://localhost:3000?code=${myCode}`;
+
+    axios
+      .get(url2)
+      .then((res) => {
+        console.log(res.data);
+
+        // state.ans = res.data.stdout;
+        // console.log(ans);
+        setState({ ans: res.data.stdout });
+
+        //setState({ count: state.count + 1 });
+      })
+      .catch((err) => console.log(err));
+  }
 
   return (
     <div className="converter">
@@ -78,9 +98,9 @@ function Converter(props) {
           }}
         />
         <AceEditor
-          value={ans}
+          value={state.ans}
           className="rectangle-11"
-          placeholder={ans}
+          placeholder={state.ans}
           mode="text"
           theme="monokai"
           onChange={onChange}
@@ -110,9 +130,11 @@ function Converter(props) {
         <Primarybutton
           continuePracticing={primarybuttonProps.continuePracticing}
         />
-        <Primarybutton2
-          continuePracticing={primarybutton2Props.continuePracticing}
-        />
+        <div className="primary-button-1 border-1px-nobel">
+          <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
+            <button onClick={handleConvert}>Convert</button>
+          </div>
+        </div>
 
         <div className="source-code-281349 nunitosans-bold-white-52px">
           {sourceCode281349}
@@ -183,8 +205,10 @@ function handleConvert() {
     .then((res) => {
       console.log(res.data);
 
-      ans = res.data.stdout;
-      console.log(ans);
+      // state.ans = res.data.stdout;
+      // console.log(ans);
+      // setState({})
+      //setState({ count: state.count + 1 });
     })
     .catch((err) => console.log(err));
 }

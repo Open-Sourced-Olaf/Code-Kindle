@@ -1,4 +1,4 @@
-TestFile = "/home/anjalisoni3655/pseudogen/backend/media/documents/sample.py"
+TestFile = "hello.py"
 import logging
 from logging import debug, info, warning, basicConfig, INFO, DEBUG, WARNING
 basicConfig(level = WARNING)
