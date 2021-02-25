@@ -5,21 +5,29 @@ import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import axios from "axios";
-import cpp from "compile-run";
+//import cpp from "compile-run";
 //const { cpp } = require("compile-run");
-// var compiler = require("compilex");
+//var compiler = require("compileon");
 // var options = { stats: true }; //prints stats on console
 
+var code = `print("hello")`;
 function onChange(newValue) {
+  code = newValue;
   console.log("change", newValue);
 }
-// const code = `#include<iostream>
-// using namespace std;
-// int main(){
-//   cout<<"hello world";
-// }
-
-// `;
+/* const code = `
+ #include<iostream> using namespace std;
+ int main(){
+   cout<<"hello world";
+ }"
+ `;
+function run() {
+  var envData = { OS: "linux", cmd: " g++" };
+  compiler.ccCompile(envData, code, function (data) {
+    // res.send(data);
+    console.log(data.output);
+  });
+} */
 // function runCPP() {
 //   compiler.init(options);
 //   // var envData = { OS: "windows", cmd: "g++" }; // (uses g++ command to compile )
@@ -156,6 +164,7 @@ function Primarybutton(props) {
 
     let form_data = new FormData();
     form_data.append("files", e.target.files[0]);
+
     let url = "http://localhost:8000/api/posts/";
     axios
       .post(url, form_data)
@@ -179,29 +188,24 @@ function Primarybutton(props) {
     </div>
   );
 }
-function handleClick() {
-  var code = `
-#include
-using namespace std;
-int main() {
-cout << "Hello World";
-}
-`;
+function handleConvert() {
+  let url2 = `http://localhost:3000/code=${code}`;
 
-  cpp
-    .runSource(code, {
-      timeout: 3000,
-      compileTimeout: 5000,
-      stdin: "0",
-      compilationPath: "/usr/bin/g++",
+  axios
+    .get(url2)
+    .then((res) => {
+      console.log(res.data);
     })
-    .then((res) => console.log(res));
+    .catch((err) => console.log(err));
 }
 function Primarybutton2(props) {
   const { continuePracticing } = props;
 
   return (
-    <div className="primary-button-1 border-1px-nobel" onClick={handleClick()}>
+    <div
+      className="primary-button-1 border-1px-nobel"
+      onClick={handleConvert()}
+    >
       <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
         {continuePracticing}
       </div>
