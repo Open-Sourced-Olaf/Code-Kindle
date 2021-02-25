@@ -1,7 +1,10 @@
 ## Code Kindle
 
-A ReactJS webapp to convert source code into pseudocode using SMT( Statistical Machine Learning).
-![code](https://i.ibb.co/d6c1zfT/code.png)
+A ReactJS webapp to convert source code into pseudocode using SMT( Statistical Machine Translation).
+
+<p align="center">
+<img src="https://i.ibb.co/d6c1zfT/code.png" alt="code">
+</p>
 
 ## How does it work
 
@@ -14,18 +17,18 @@ pseudocode after the conversion.
 ## Future Scopes
 - Add support to more languages
 - Convert one language code into other like cpp code to php and so on.
-- Improving the algoritm of the translator to include complex cases like multiple functional calls inside the main.
+- Improving the algorithm of the translator to include complex cases like multiple functional calls inside the main.
 
 
 ## Project Structure
-- backend folder contains the code for the Django based API to upload the files into the projects directory.
-- code_converter contains the frontend code deployed in DFINITY.
-- cpp-pseudogen folder contains the translator code for cpp/c languages.
-- frontend folder contains the UI of the entire webapp.
-- python-scripts folder contains the translator for python source code.
+- `backend folder` contains the code for the Django based API to upload the files into the projects directory.
+- `code_converter` folder contains the frontend code deployed on DFINITY.
+- `cpp-pseudogen` folder contains the translator code for cpp/c languages.
+- `frontend folder` contains the UI of the entire webapp.
+- `python-scripts` folder contains the translator for python source code.
 
 ## How to run the project locally.
-- To translate the cpp/c codes,move to the cpp-pseudogen folder upload a file named "prog.cpp and then compile the main.cpp using the command
+- To translate the cpp/c codes,move to the cpp-pseudogen folder upload a file named "prog.cpp" and then compile the main.cpp using the command
  "g++ -o main.cpp" after that execute ./main, it will display the output in the terminal as well as create a output.text file.
  - To translate the python code, move to the python-scripts folder, upload a file named hello.py, then compile the generate-pseudo.py file using the
    python3 generate-pseudo.py, it will produce hello-pseudo file in the working directory.
@@ -43,7 +46,7 @@ pseudocode after the conversion.
  - add and commit your changes
  - then push the changes into your branch
  - now you can create a PR using that branch in our repository.
- - :tada you have successfully contributed to this project.
+ - :tada: you have successfully contributed to this project.
 
 ## Useful links
 - https://sdk.dfinity.org/docs/developers-guide/tutorials/custom-frontend.html
