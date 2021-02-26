@@ -1,0 +1,7 @@
+Declare Function main
+   Declare 3 Integer variable sum = 0 
+   Start a loop from int i = 1 till  i <= 10
+      Perform operation: sum += i
+   Print Integer sum
+   Print  \n
+   function Returns 0

@@ -1,23 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
-import compiler from "compileon";
+import axios from "axios";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
-var newValue;
-function onChange(newValue) {
-  console.log("change", newValue);
-}
-var language_id;
-function language(event) {
-  event.preventDefault();
-  this.setState({ language_id: event.target.value });
-}
-function runCPP() {
-  alert("hello");
-}
+const options = ["c", "cpp", "python"];
+var language;
+const defaultOption = options[0];
+
 function App() {
   return <Converter {...ConverterData} />;
 }
@@ -25,6 +19,26 @@ function App() {
 export default App;
 
 function Converter(props) {
+  const [state, setState] = useState({
+    ans: "pseudocode",
+  });
+  const [file, setFile] = useState({ files: null });
+
+  var myCode;
+  const onSelect = (e) => {
+    language = e.value;
+    //  console.log(e.value);
+  };
+
+  function onChange(newValue) {
+    //  value = ans;
+    myCode = `${newValue}`;
+    console.log("mycode", myCode);
+    console.log("change", newValue);
+  }
+
+  console.log(state.ans); // 0
+
   const {
     rectangle10,
     rectangle11,
@@ -37,6 +51,54 @@ function Converter(props) {
     primarybuttonProps,
     primarybutton2Props,
   } = props;
+  function handleConvert() {
+    //alert("hello")code = "hello";
+    console.log(myCode);
+    console.log(language);
+    let url2 = `http://localhost:3004?lang=${language}&code=${myCode}`;
+
+    axios
+      .post(url2, {
+        body: myCode,
+      })
+      .then((res) => {
+        console.log(res.data);
+
+        // state.ans = res.data.stdout;
+        // console.log(ans);
+        setState({ ans: res.data.stdout });
+
+        //setState({ count: state.count + 1 });
+      })
+      .catch((err) => console.log(err));
+  }
+  const handleFilesChange = (e) => {
+    setFile(e.target.files[0]);
+
+    console.log(e.target.files[0]);
+    console.log(file.files);
+
+    let form_data = new FormData();
+    form_data.append("files", e.target.files[0]);
+    var name = e.target.files[0];
+
+    let url2 = `http://localhost:3004?lang=${language}&file=${name}`;
+
+    axios
+      .post(url2, {
+        body: myCode,
+      })
+      .then((res) => {
+        console.log(res.data);
+
+        // state.ans = res.data.stdout;
+        // console.log(ans);
+        setState({ ans: res.data.stdout });
+
+        //setState({ count: state.count + 1 });
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="converter">
@@ -72,7 +134,9 @@ function Converter(props) {
           }}
         />
         <AceEditor
+          value={state.ans}
           className="rectangle-11"
+          placeholder={state.ans}
           mode="text"
           theme="monokai"
           onChange={onChange}
@@ -98,13 +162,32 @@ function Converter(props) {
           {pseudocode281345}
         </h1>
 
-        <div className="text-3 chivo-normal-nobel-16px">{text3}</div>
-        <Primarybutton
-          continuePracticing={primarybuttonProps.continuePracticing}
-        />
-        <Primarybutton2
-          continuePracticing={primarybutton2Props.continuePracticing}
-        />
+        <div className="primary-button border-1px-nobel">
+          <div className="continue-practicing valign-text-bottom archivo-bold-white-16px">
+            <input
+              type="file"
+              id="myfile"
+              name="hello"
+              enctype="multipart/form-data"
+              onChange={handleFilesChange}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="primary-button-1 border-1px-nobel">
+          <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
+            <button onClick={handleConvert}>Convert</button>
+          </div>
+        </div>
+        <div className="text-3 chivo-normal-nobel-16px">
+          <Dropdown
+            options={options}
+            onChange={onSelect}
+            value={defaultOption}
+            placeholder="Select an option"
+          />
+        </div>
 
         <div className="source-code-281349 nunitosans-bold-white-52px">
           {sourceCode281349}
@@ -131,29 +214,6 @@ function Mainnavigation(props) {
   );
 }
 
-function Primarybutton(props) {
-  const { continuePracticing } = props;
-
-  return (
-    <div className="primary-button border-1px-nobel" onClick={() => runCPP()}>
-      <div className="continue-practicing valign-text-bottom archivo-bold-white-16px">
-        {continuePracticing}
-      </div>
-    </div>
-  );
-}
-
-function Primarybutton2(props) {
-  const { continuePracticing } = props;
-
-  return (
-    <div className="primary-button-1 border-1px-nobel">
-      <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
-        {continuePracticing}
-      </div>
-    </div>
-  );
-}
 const mainnavigationData = {
   place: "Home",
   browseI281343271: "Converter",
