@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
     cb(null, "./codes/cpp");
   },
   filename: function (req, file, cb) {
-    cb(null, "hello");
+    cb(null, "hello.cpp");
   },
 });
 
@@ -33,7 +33,7 @@ const upload = multer({
 });
 
 app.post("/", (req, res) => {
-  upload.single(req.query.name);
+  upload.single("hello");
   // upload.single("avatar"),
   // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
   console.log(req.url);

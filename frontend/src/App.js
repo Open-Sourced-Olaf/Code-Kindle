@@ -82,7 +82,7 @@ function Converter(props) {
     form_data.append("files", e.target.files[0]);
     var name = e.target.files[0];
 
-    let url2 = `http://localhost:3004?lang=${language}&file=${name}`;
+     let url2 = `http://localhost:3004?lang=${language}&file=${name}`;
 
     axios
       .post(url2, {
