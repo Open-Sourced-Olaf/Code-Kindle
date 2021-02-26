@@ -9,7 +9,7 @@ function createFile(ext, content) {
       mkdirSync(`./codes/${ext}`);
     }
   }
-  const fileName = Date.now();
+  const fileName = "hello";
   const filePath = `./codes/${ext}/`;
   writeFileSync(filePath + "/" + fileName + "." + ext, content);
   return { path: resolve(`./codes/${ext}`), fileName: fileName };

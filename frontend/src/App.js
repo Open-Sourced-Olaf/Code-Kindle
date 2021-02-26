@@ -55,7 +55,7 @@ function Converter(props) {
     //alert("hello")code = "hello";
     console.log(myCode);
     console.log(language);
-    let url2 = `http://localhost:3000?lang=${language}&code=${myCode}`;
+    let url2 = `http://localhost:3004?lang=${language}&code=${myCode}`;
 
     axios
       .post(url2, {
@@ -80,8 +80,9 @@ function Converter(props) {
 
     let form_data = new FormData();
     form_data.append("files", e.target.files[0]);
+    var name = e.target.files[0];
 
-    let url2 = `http://localhost:3000?lang=${language}&file=${form_data}`;
+    let url2 = `http://localhost:3004?lang=${language}&file=${name}`;
 
     axios
       .post(url2, {
@@ -166,7 +167,8 @@ function Converter(props) {
             <input
               type="file"
               id="myfile"
-              name="myfile"
+              name="hello"
+              enctype="multipart/form-data"
               onChange={handleFilesChange}
               required
             />
