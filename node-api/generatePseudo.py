@@ -1,7 +1,24 @@
-TestFile = "hello.py"
+
 import logging
 from logging import debug, info, warning, basicConfig, INFO, DEBUG, WARNING
 basicConfig(level = WARNING)
+import os
+from pathlib import Path
+path  = Path(__file__).resolve().parent.parent
+
+
+
+MEDIA_ROOT = os.path.join(path, "backend","media","documents")
+
+
+
+arr = os.listdir(MEDIA_ROOT)
+
+for file in arr:
+    filename=file
+
+TestFile= os.path.join(MEDIA_ROOT,filename)
+
 
 def getTextFile(filep):
     file = open(filep)
@@ -98,7 +115,8 @@ def writeListFile(listFile, name = "/home/asus/Terminal-2.0/python-scripts/pytho
     log = open(name, "r")
     for line in log:
         print(line)
-   
+
+    
 
 
 def indent(listFile, avoidLines):
@@ -199,12 +217,12 @@ def removeLastChar(line, remove):
 
 def main(filename):
 
-    #print("Now working on " + filename)
+   
     listFile = getTextFile(filename)                             
     listFile = removeLastCharacter(listFile)                                 
     listFile = removeBlanks(listFile)                       
     avoidLines = detectMultiLineComment(listFile)       
-   # print("Searching through file, this may take a while")
+    
 
     clues = [["elif", "~~~"],]
 
@@ -232,3 +250,7 @@ def main(filename):
     writeListFile(listFile, filename)
 
 main(TestFile)
+pseudo= TestFile[0:len(TestFile)-3]  +"-Pseudocode"+TestFile[(len(TestFile)-3) : len(TestFile)]
+os.remove(TestFile)
+
+os.remove(pseudo)

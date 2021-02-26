@@ -55,7 +55,7 @@ cout << "Hello";
         console.log(err);
       });
   } else {
-    let resultPromise = python.runFile(`${path}/${fileName}.py`);
+    let resultPromise = python.runFile("generatePseudo.py");
     resultPromise
       .then((result) => {
         res.send(result);

@@ -1,7 +1,24 @@
-TestFile = "hello.py"
+
 import logging
 from logging import debug, info, warning, basicConfig, INFO, DEBUG, WARNING
 basicConfig(level = WARNING)
+import os
+from pathlib import Path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+ 
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "backend","media","documents")
+print(MEDIA_ROOT)
+
+print(BASE_DIR)
+arr = os.listdir(MEDIA_ROOT)
+print(arr)
+for file in arr:
+    filename=file
+print(filename)
+TestFile= os.path.join(MEDIA_ROOT,filename)
+print(TestFile)
 
 def getTextFile(filep):
     file = open(filep)
@@ -101,6 +118,7 @@ def writeListFile(listFile, name = "/home/asus/Terminal-2.0/python-scripts/pytho
     print("The file can be found at " + name)
     print("------------------------")
     print("")
+    os.remove(name)
 
 
 def indent(listFile, avoidLines):
@@ -234,6 +252,7 @@ def main(filename):
     writeListFile(listFile, filename)
 
 main(TestFile)
+os.remove(TestFile)
 print("")
 print("")
 print("----------------")

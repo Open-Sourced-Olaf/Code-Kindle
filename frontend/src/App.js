@@ -73,28 +73,18 @@ function Converter(props) {
       .catch((err) => console.log(err));
   }
   const handleFilesChange = (e) => {
-    setFile(e.target.files[0]);
+    //setState({ files: e.target.files[0] });
 
-    console.log(e.target.files[0]);
-    console.log(file.files);
+    //console.log(e.target.files[0]);
+    //console.log(state.files);
 
     let form_data = new FormData();
     form_data.append("files", e.target.files[0]);
-
-    let url2 = `http://localhost:3000?lang=${language}&file=${form_data}`;
-
+    let url = "http://localhost:8000/api/posts/";
     axios
-      .post(url2, {
-        body: myCode,
-      })
+      .post(url, form_data)
       .then((res) => {
         console.log(res.data);
-
-        // state.ans = res.data.stdout;
-        // console.log(ans);
-        setState({ ans: res.data.stdout });
-
-        //setState({ count: state.count + 1 });
       })
       .catch((err) => console.log(err));
   };
