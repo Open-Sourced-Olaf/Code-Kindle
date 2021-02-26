@@ -12,13 +12,6 @@ const options = ["c", "cpp", "python"];
 var language;
 const defaultOption = options[0];
 
-const code = `
- #include<iostream> using namespace std;
- int main(){
-   cout<<"hello world";
- }"
- `;
-
 function App() {
   return <Converter {...ConverterData} />;
 }
@@ -29,10 +22,12 @@ function Converter(props) {
   const [state, setState] = useState({
     ans: "pseudocode",
   });
+  const [file, setFile] = useState({ files: null });
+
   var myCode;
   const onSelect = (e) => {
     language = e.value;
-    console.log(e.value);
+    //  console.log(e.value);
   };
 
   function onChange(newValue) {
@@ -58,10 +53,14 @@ function Converter(props) {
   } = props;
   function handleConvert() {
     //alert("hello")code = "hello";
-    let url2 = `http://localhost:3000?code=${myCode}&lang=${language}`;
+    console.log(myCode);
+    console.log(language);
+    let url2 = `http://localhost:3000?lang=${language}&code=${myCode}`;
 
     axios
-      .get(url2)
+      .post(url2, {
+        body: myCode,
+      })
       .then((res) => {
         console.log(res.data);
 
@@ -73,6 +72,32 @@ function Converter(props) {
       })
       .catch((err) => console.log(err));
   }
+  const handleFilesChange = (e) => {
+    setFile(e.target.files[0]);
+
+    console.log(e.target.files[0]);
+    console.log(file.files);
+
+    let form_data = new FormData();
+    form_data.append("files", e.target.files[0]);
+
+    let url2 = `http://localhost:3000?lang=${language}&file=${form_data}`;
+
+    axios
+      .post(url2, {
+        body: myCode,
+      })
+      .then((res) => {
+        console.log(res.data);
+
+        // state.ans = res.data.stdout;
+        // console.log(ans);
+        setState({ ans: res.data.stdout });
+
+        //setState({ count: state.count + 1 });
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="converter">
@@ -136,9 +161,17 @@ function Converter(props) {
           {pseudocode281345}
         </h1>
 
-        <Primarybutton
-          continuePracticing={primarybuttonProps.continuePracticing}
-        />
+        <div className="primary-button border-1px-nobel">
+          <div className="continue-practicing valign-text-bottom archivo-bold-white-16px">
+            <input
+              type="file"
+              id="myfile"
+              name="myfile"
+              onChange={handleFilesChange}
+              required
+            />
+          </div>
+        </div>
 
         <div className="primary-button-1 border-1px-nobel">
           <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
@@ -179,68 +212,6 @@ function Mainnavigation(props) {
   );
 }
 
-function Primarybutton(props) {
-  const { continuePracticing } = props;
-  //const [state, setState] = useState({ files: null });
-  const handleFilesChange = (e) => {
-    //setState({ files: e.target.files[0] });
-
-    //console.log(e.target.files[0]);
-    //console.log(state.files);
-
-    let form_data = new FormData();
-    form_data.append("files", e.target.files[0]);
-
-    let url = "http://localhost:8000/api/posts/";
-    axios
-      .post(url, form_data)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  return (
-    <div className="primary-button border-1px-nobel">
-      <div className="continue-practicing valign-text-bottom archivo-bold-white-16px">
-        <input
-          type="file"
-          id="myfile"
-          name="myfile"
-          onChange={handleFilesChange}
-          required
-        />
-      </div>
-    </div>
-  );
-}
-function handleConvert() {
-  //alert("hello")code = "hello";
-  let url2 = `http://localhost:3000`;
-
-  axios
-    .get(url2)
-    .then((res) => {
-      console.log(res.data);
-
-      // state.ans = res.data.stdout;
-      // console.log(ans);
-      // setState({})
-      //setState({ count: state.count + 1 });
-    })
-    .catch((err) => console.log(err));
-}
-function Primarybutton2(props) {
-  const { continuePracticing } = props;
-
-  return (
-    <div className="primary-button-1 border-1px-nobel">
-      <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
-        <button onClick={handleConvert}>Convert</button>
-      </div>
-    </div>
-  );
-}
 const mainnavigationData = {
   place: "Home",
   browseI281343271: "Converter",
