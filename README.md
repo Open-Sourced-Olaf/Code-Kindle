@@ -36,7 +36,8 @@ pseudocode after the conversion.
  - to deploy and run the code on DFINITY, run dfx start --background to start the server in the backgrpound, then run dfx deploy, it will produce a      code_converter_assets canister id, copy that.
  - then open dfx.json and find the ip address, now the url of the web app will be http://127.0.0.1:8000/?canisterId=[canister-id].
  - to deploy, run dfx ping ic, dfx deploy --network=ic.
- - the deployed url will be https://[ your canisterId here ].ic0.app/
+ - the deployed url will be https://[ your canisterId here ].ic0.app/ 
+ > https://gb33l-zyaaa-aaaab-aagyq-cai.ic0.app/
  
  
  ## How to contribute.
