@@ -24,7 +24,7 @@ function Converter(props) {
     ans: "pseudocode",
   });
   const [file, setFile] = useState(null);
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState("source code");
 
   var myCode;
   const onSelect = (e) => {
@@ -37,6 +37,22 @@ function Converter(props) {
     myCode = `${newValue}`;
     console.log("mycode", myCode);
     console.log("change", newValue);
+    console.log(myCode);
+    console.log(language);
+    let url2 = `http://localhost:3004/createFile?lang=${language}&code=${myCode}`;
+
+    axios
+      .post(url2, {
+        body: myCode,
+      })
+      .then((res) => {
+        console.log(res.data);
+
+        // state.ans = res.data.stdout;
+        // console.log(ans);
+        //  setState({ ans: res.data.stdout });
+      })
+      .catch((err) => console.log(err));
   }
 
   console.log(state.ans); // 0
@@ -54,10 +70,8 @@ function Converter(props) {
     primarybutton2Props,
   } = props;
   function handleConvert() {
-    //alert("hello")code = "hello";
-    console.log(myCode);
     console.log(language);
-    let url2 = `http://localhost:3004?lang=${language}&code=${myCode}`;
+    let url2 = `http://localhost:3004/convert?lang=${language}`;
 
     axios
       .post(url2, {
@@ -69,8 +83,6 @@ function Converter(props) {
         // state.ans = res.data.stdout;
         // console.log(ans);
         setState({ ans: res.data.stdout });
-
-        //setState({ count: state.count + 1 });
       })
       .catch((err) => console.log(err));
   }
@@ -78,17 +90,18 @@ function Converter(props) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("myImage", file);
-    console.log(file);
+    console.log("fileupdae", file);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
       },
     };
+    console.log("formData", formData);
     axios
       .post("http://localhost:3004/upload", formData, config)
       .then((response) => {
-        console.log(response.data);
-        alert("The file is successfully uploaded");
+        console.log("response after upload", response.data);
+        // alert("The file is successfully uploaded");
       })
       .catch((error) => {
         console.log(error);
@@ -96,7 +109,7 @@ function Converter(props) {
   };
   const handleFilesChange = (e) => {
     setFile({ file: e.target.files[0] });
-    /*   var reader = new FileReader();
+    var reader = new FileReader();
     var fileToRead = document.querySelector("input").files[0];
 
     // attach event, that will be fired, when read is end
@@ -110,7 +123,25 @@ function Converter(props) {
     });
 
     // start reading a loaded file
-    reader.readAsText(fileToRead); */
+    reader.readAsText(fileToRead);
+    const formData = new FormData();
+    formData.append("myImage", e.target.files[0]);
+    console.log("fileupdae", file);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    console.log("formData", formData);
+    axios
+      .post("http://localhost:3004/upload", formData, config)
+      .then((response) => {
+        console.log("response after upload", response.data);
+        // alert("The file is successfully uploaded");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -125,12 +156,13 @@ function Converter(props) {
         <div className="rectangle-9"></div>
 
         <AceEditor
+          value={JSON.stringify(code)}
           width="600px"
           className="rectangle-10"
           mode="C++"
           theme="monokai"
           name="UNIQUE_ID_OF_DIV"
-          placeholder="Write the code to be converted"
+          placeholder="code to be converted"
           editorProps={{ $blockScrolling: true }}
           onChange={onChange}
           fontSize={14}
@@ -180,22 +212,22 @@ function Converter(props) {
           style={{ marginRight: "100px" }}
         >
           <div className="continue-practicing valign-text-bottom archivo-bold-white-16px">
-            <Upload></Upload>
-            {/* <form onSubmit={handleSubmit}>
-              <input
-                type="file"
-                name="myImage"
-                id="file"
-                onChange={handleFilesChange}
-              />
-              <button type="submit">Upload</button>
-            </form> */}
+            {/* <Upload></Upload> */}
+            {/* <form onSubmit={handleSubmit}> */}
+            <input
+              type="file"
+              name="myImage"
+              id="file"
+              onChange={handleFilesChange}
+            />
+            {/* <button type="submit">Upload</button> */}
+            {/* </form> */}
           </div>
         </div>
 
         <div
           className="primary-button-1 border-1px-nobel"
-          style={{ marginLeft: "200px" }}
+          style={{ marginLeft: "20px" }}
         >
           <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
             <button onClick={handleConvert}>Convert</button>

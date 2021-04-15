@@ -27,10 +27,11 @@ const upload = multer({
 });
 
 app.post("/upload", upload.single("myImage"), (req, res) => {
-  console.log(req.file);
+  console.log("file in server", req.file);
+  return "ok";
 });
 
-app.post("/", (req, res) => {
+app.post("/createFile", (req, res) => {
   //upload.single(req.query.name);
   // upload.single("avatar"),
   // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
@@ -39,10 +40,9 @@ app.post("/", (req, res) => {
   console.log(req.body.body);
   var language = req.query.lang;
   console.log(language);
+
   var code = req.body.body;
-  //var file = req.query.file;
-  // console.log(file.filename);
-  //console.log(file.fileName);
+
   if (code !== undefined) {
     if (language === "cpp") {
       const { path, fileName } = createFile("cpp", code);
@@ -50,8 +50,10 @@ app.post("/", (req, res) => {
       const { path, fileName } = createFile("py", code);
     }
   }
-  // console.log(path);
-  // console.log(fileName);
+});
+app.post("/convert", (req, res) => {
+  var language = req.query.lang;
+  console.log(language);
 
   const sourcecode = `print("Hell0 W0rld!")`;
   var CPPcode = `
@@ -95,8 +97,6 @@ cout << "Hello";
         console.log(err);
       });
   }
-
-  //res.json(["Tony", "Lisa", "Michael", "Ginger", "Food"]);
 });
 
 app.listen(3004, () => {
