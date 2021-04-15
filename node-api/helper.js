@@ -5,12 +5,12 @@ function createFile(ext, content) {
   if (!existsSync("./codes")) {
     mkdirSync("./codes");
   } else {
-    if (!existsSync(`./codes/${ext}`)) {
-      mkdirSync(`./codes/${ext}`);
-    }
+    // if (!existsSync(`./codes/${ext}`)) {
+    //   mkdirSync(`./codes/${ext}`);
+    // }
   }
   const fileName = "hello";
-  const filePath = `./codes/${ext}/`;
+  const filePath = `./codes`;
   writeFileSync(filePath + "/" + fileName + "." + ext, content);
   return { path: resolve(`./codes/${ext}`), fileName: fileName };
 }

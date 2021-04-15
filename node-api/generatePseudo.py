@@ -1,4 +1,4 @@
-TestFile = "./codes/py/hello.py"
+TestFile = "./codes/hello.py"
 import logging
 from logging import debug, info, warning, basicConfig, INFO, DEBUG, WARNING
 basicConfig(level = WARNING)

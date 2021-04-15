@@ -318,7 +318,7 @@ void check(string word, string line) //Checking for various conditions.
 
 int main()
 {
-    ifstream inFile("./codes/cpp/hello.cpp");
+    ifstream inFile("./codes/hello.cpp");
     //Input file containing Pseudo code
 
     intialize();

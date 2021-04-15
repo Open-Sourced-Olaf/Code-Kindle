@@ -6,6 +6,7 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import axios from "axios";
 import Dropdown from "react-dropdown";
+import Upload from "./Upload";
 import "react-dropdown/style.css";
 
 const options = ["c", "cpp", "python"];
@@ -22,7 +23,8 @@ function Converter(props) {
   const [state, setState] = useState({
     ans: "pseudocode",
   });
-  const [file, setFile] = useState({ files: null });
+  const [file, setFile] = useState(null);
+  const [code, setCode] = useState("");
 
   var myCode;
   const onSelect = (e) => {
@@ -72,32 +74,43 @@ function Converter(props) {
       })
       .catch((err) => console.log(err));
   }
-  const handleFilesChange = (e) => {
-    setFile(e.target.files[0]);
-
-    console.log(e.target.files[0]);
-    console.log(file.files);
-
-    let form_data = new FormData();
-    form_data.append("files", e.target.files[0]);
-    var name = e.target.files[0];
-
-    let url2 = `http://localhost:3004?lang=${language}&file=${name}`;
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("myImage", file);
+    console.log(file);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
     axios
-      .post(url2, {
-        body: myCode,
+      .post("http://localhost:3004/upload", formData, config)
+      .then((response) => {
+        console.log(response.data);
+        alert("The file is successfully uploaded");
       })
-      .then((res) => {
-        console.log(res.data);
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleFilesChange = (e) => {
+    setFile({ file: e.target.files[0] });
+    /*   var reader = new FileReader();
+    var fileToRead = document.querySelector("input").files[0];
 
-        // state.ans = res.data.stdout;
-        // console.log(ans);
-        setState({ ans: res.data.stdout });
+    // attach event, that will be fired, when read is end
+    reader.addEventListener("loadend", function () {
+      // reader.result contains the contents of blob as a typed array
+      // we insert content of file in DOM here
+      document.getElementById("file").innerText = reader.result;
+      // content = reader.result;
+      console.log(reader.result);
+      setCode({ code: reader.result });
+    });
 
-        //setState({ count: state.count + 1 });
-      })
-      .catch((err) => console.log(err));
+    // start reading a loaded file
+    reader.readAsText(fileToRead); */
   };
 
   return (
@@ -162,20 +175,28 @@ function Converter(props) {
           {pseudocode281345}
         </h1>
 
-        <div className="primary-button border-1px-nobel">
+        <div
+          className="primary-button border-1px-nobel"
+          style={{ marginRight: "100px" }}
+        >
           <div className="continue-practicing valign-text-bottom archivo-bold-white-16px">
-            <input
-              type="file"
-              id="myfile"
-              name="hello"
-              enctype="multipart/form-data"
-              onChange={handleFilesChange}
-              required
-            />
+            <Upload></Upload>
+            {/* <form onSubmit={handleSubmit}>
+              <input
+                type="file"
+                name="myImage"
+                id="file"
+                onChange={handleFilesChange}
+              />
+              <button type="submit">Upload</button>
+            </form> */}
           </div>
         </div>
 
-        <div className="primary-button-1 border-1px-nobel">
+        <div
+          className="primary-button-1 border-1px-nobel"
+          style={{ marginLeft: "200px" }}
+        >
           <div className="continue-practicing-1 valign-text-bottom archivo-bold-white-16px">
             <button onClick={handleConvert}>Convert</button>
           </div>
