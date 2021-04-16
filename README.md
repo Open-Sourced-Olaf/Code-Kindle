@@ -6,7 +6,8 @@
   </a>
 
   <p align="center">
-    "A ReactJS webapp to convert source code into pseudocode using SMT( Statistical Machine Translation)."
+  
+   **A ReactJS webapp to convert source code into pseudocode using SMT( Statistical Machine Translation)**
     <br /><br />
     <a href="https://gb33l-zyaaa-aaaab-aagyq-cai.ic0.app/"><strong>Use Code Kindle</strong></a>
     <br />
