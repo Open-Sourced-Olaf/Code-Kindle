@@ -22,24 +22,6 @@
 </p>
 
 
-<!-- TABLE OF CONTENTS -->
-
-## Table of Contents
-
-- [About the Project](#about-the-project)
-  - [Usage Guidelines](#usage-guidelines)
-  - [Built With](#built-with)
-- [Project Architecture](#project-architecture)
-- [Getting Started](#getting-started-as-contributor)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Roadmap](#roadmap)
-- [Local Dev Setup](#local-dev-setup)
-- [Contact](#admins)
-- [Resources](#deployment-and-resources)
-
-
-
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
