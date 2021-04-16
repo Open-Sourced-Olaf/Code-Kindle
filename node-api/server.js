@@ -3,6 +3,7 @@ const { c, cpp, node, python, java } = require("compile-run");
 const { createFile } = require("./helper");
 const bodyParser = require("body-parser");
 const app = express();
+const path = require("path");
 const multer = require("multer");
 const port = 8000;
 var cors = require("cors");
@@ -12,28 +13,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors()); // Use this after the variable declaration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./codes/cpp");
+    cb(null, "./codes");
   },
   filename: function (req, file, cb) {
-    cb(null, "hello");
+    console.log("file storage", file);
+
+    cb(null, "hello" + path.extname(file.originalname));
   },
 });
-
 const upload = multer({
   storage: storage,
-  limits: {
-    fileSize: 1000000,
-  },
-  // fileFilter(req, file, cb) {
-  //   if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-  //     return cb(new Error("Please provide an image!"));
-  //   }
-  //   cb(undefined, true);
-  // },
+  limits: { fileSize: 1000000 },
+});
+
+app.post("/upload", upload.single("myImage"), (req, res) => {
+  console.log(req.file);
 });
 
 app.post("/", (req, res) => {
-  upload.single(req.query.name);
+  //upload.single(req.query.name);
   // upload.single("avatar"),
   // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
   console.log(req.url);
@@ -42,14 +40,16 @@ app.post("/", (req, res) => {
   var language = req.query.lang;
   console.log(language);
   var code = req.body.body;
-  var file = req.query.file;
-  console.log(file);
-  if (language === "cpp") {
-    const { path, fileName } = createFile("cpp", code);
-  } else if (language === "python") {
-    const { path, fileName } = createFile("py", code);
+  //var file = req.query.file;
+  // console.log(file.filename);
+  //console.log(file.fileName);
+  if (code !== undefined) {
+    if (language === "cpp") {
+      const { path, fileName } = createFile("cpp", code);
+    } else if (language === "python") {
+      const { path, fileName } = createFile("py", code);
+    }
   }
-
   // console.log(path);
   // console.log(fileName);
 
@@ -98,6 +98,7 @@ cout << "Hello";
 
   //res.json(["Tony", "Lisa", "Michael", "Ginger", "Food"]);
 });
+
 app.listen(3004, () => {
   console.log("Server running on port 3004");
 });
