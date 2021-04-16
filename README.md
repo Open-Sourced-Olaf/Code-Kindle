@@ -36,10 +36,10 @@ pseudocode after the conversion.
  - to deploy and run the code on DFINITY, run `dfx start --background` to start the server in the background, then run `dfx deploy`, it will produce a      code_converter_assets canister id, copy that.
  - then open dfx.json and find the ip address, now the url of the web app will be http://127.0.0.1:8000/?canisterId=[canister-id].
  - to deploy, run `dfx ping ic`, `dfx deploy --network=ic`.
- - the deployed url will be https://[ your canisterId here ].ic0.app/ 
+ - the deployed url will be https://[ your canisterId here ].ic0.app/
  > https://gb33l-zyaaa-aaaab-aagyq-cai.ic0.app/
- 
- 
+
+
  ## How to contribute.
  - Fork and clone the repository.
  - create a branch
@@ -53,3 +53,17 @@ pseudocode after the conversion.
 - https://sdk.dfinity.org/docs/developers-guide/tutorials/custom-frontend.html
 - https://mlh-fellowship.gitbook.io/fellow-handbook/sponsor-resources/dfinity
 - Other links can be found in the WIKI page of this repository.
+
+## 🌟 Contributors
+
+<table>
+	<tr>
+		<td>
+      <a href="https://github.com/Open-Sourced-Olaf/Code-Kindle/graphs/contributors">
+        <img src="https://contrib.rocks/image?repo=Open-Sourced-Olaf/Code-Kindle" />
+      </a>
+		</td>
+	</tr>
+</table>
+
+</div>
