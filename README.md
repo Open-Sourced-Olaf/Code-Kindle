@@ -112,8 +112,8 @@ npm run start
 
 - To translate the cpp/c codes,move to the cpp-pseudogen folder upload a file named "prog.cpp" and then compile the main.cpp using the command
  `g++ main.cpp -o main` after that execute `./main`, it will display the output in the terminal as well as create a output.text file.
- - To translate the python code, move to the python-scripts folder, upload a file named hello.py, then compile the generate-pseudo.py file using the
-   `python3 generate-pseudo.py`, it will produce hello-pseudo file in the working directory.
+ - To translate the python code, move to the python-scripts folder, upload a file named hello.py, then compile the generatePseudo.py file using the
+   `python3 generatePseudo.py`, it will produce hello-pseudo file in the working directory.
   - to run the frontend code, move to the frontend directory and run `npm i` followed by `npm start`.
  - to deploy and run the code on DFINITY, run `dfx start --background` to start the server in the background, then run `dfx deploy`, it will produce a      code_converter_assets canister id, copy that.
  - then open dfx.json and find the ip address, now the url of the web app will be http://127.0.0.1:8000/?canisterId=[canister-id].
