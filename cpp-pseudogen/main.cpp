@@ -181,8 +181,8 @@ void func_dt(string line) //Mapping of varaibles to their data types.
             outFile << "   ";
             cout << "   ";
         }
-        outFile << "Declare " << var_name.size() << " " << keyword[Data_type] << " variable ";
-        cout << "Declare " << var_name.size() << " " << keyword[Data_type] << " variable ";
+        outFile << "Declare " << (var_name.size() / 3) << " " << keyword[Data_type] << " variable ";
+        cout << "Declare " << (var_name.size() / 3) << " " << keyword[Data_type] << " variable ";
         for (auto value : var_name)
         {
             outFile << value << " ";
@@ -320,15 +320,15 @@ int main()
 {
     ifstream inFile("prog.cpp");
     //Input file containing Pseudo code
-    
+
     intialize();
     string line;
     int i = 0;
-   // cout << "line" << inFile << "\n";
+    // cout << "line" << inFile << "\n";
     while (inFile)
     {
         getline(inFile, line);
-       
+
         i = 0;
         string word = "";
         while (i < line.size() && ((useless.find(line[i]) != useless.end())))
